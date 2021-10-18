@@ -1,0 +1,107 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d899cf0..9e9ba3c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -23,102 +23,6 @@ set(MIRAKC_ARIB_TSDUCK_ARIB_CXXFLAGS
+ #
+ set(MIRAKC_ARIB_VERSION "0.16.4"
+   CACHE STRING "mirakc-arib version." FORCE)
+-#
+-# Get the version of the Git submodule
+-#
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/docopt"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_DOCOPT_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/fmt"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_FMT_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_SPDLOG_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/rapidjson"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_RAPIDJSON_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/cppcodec"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_CPPCODEC_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/aribb24"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_ARIBB24_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/tsduck-arib"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_TSDUCK_ARIB_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/libisdb"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_LIBISDB_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/googletest"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_GOOGLETEST_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-execute_process(
+-  COMMAND
+-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/tag-or-hash
+-  WORKING_DIRECTORY
+-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/google-benchmark"
+-  OUTPUT_VARIABLE
+-    MIRAKC_ARIB_GOOGLE_BENCHMARK_VERSION
+-  OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-#
+-# Set the version of the Git submodule
+-#
+ set(MIRAKC_ARIB_DOCOPT_VERSION "${MIRAKC_ARIB_DOCOPT_VERSION}"
+   CACHE STRING "docopt.cpp version to use." FORCE)
+ set(MIRAKC_ARIB_FMT_VERSION "${MIRAKC_ARIB_FMT_VERSION}"

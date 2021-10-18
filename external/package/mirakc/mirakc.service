@@ -1,0 +1,11 @@
+[Unit]
+Description=Mirakurun-compatible PVR backend written in Rust
+After=network.target
+
+[Service]
+CacheDirectory=mirakc
+Environment=MIRAKC_CONFIG=/etc/mirakc/config.yml
+ExecStart=/usr/bin/mirakc
+
+[Install]
+WantedBy=multi-user.target

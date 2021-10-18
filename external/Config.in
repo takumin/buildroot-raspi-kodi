@@ -1,0 +1,5 @@
+source "$BR2_EXTERNAL_RASPI_PATH/package/libarib25/Config.in"
+source "$BR2_EXTERNAL_RASPI_PATH/package/recdvb/Config.in"
+source "$BR2_EXTERNAL_RASPI_PATH/package/recpt1/Config.in"
+source "$BR2_EXTERNAL_RASPI_PATH/package/mirakc-arib/Config.in"
+source "$BR2_EXTERNAL_RASPI_PATH/package/mirakc/Config.in"

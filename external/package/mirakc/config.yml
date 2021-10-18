@@ -1,0 +1,43 @@
+epg:
+  cache-dir: /var/cache/mirakc
+
+server:
+  addrs:
+  - http: 0.0.0.0:40772
+
+channels:
+- name: NHK 総合
+  type: GR
+  channel: '47'
+- name: NHK Eテレ
+  type: GR
+  channel: '39'
+- name: とちぎテレビ
+  type: GR
+  channel: '29'
+- name: 日本テレビ
+  type: GR
+  channel: '34'
+- name: テレビ朝日
+  type: GR
+  channel: '17'
+- name: TBS
+  type: GR
+  channel: '15'
+- name: テレビ東京
+  type: GR
+  channel: '18'
+- name: フジテレビ
+  type: GR
+  channel: '35'
+
+tuners:
+- name: Tuner0
+  types: [GR]
+  command: >-
+    recdvb {{{channel}}} - -
+
+filters:
+  decode-filter:
+    command: >-
+      /usr/bin/arib-b25-stream

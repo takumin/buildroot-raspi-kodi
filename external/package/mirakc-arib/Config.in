@@ -1,0 +1,12 @@
+config BR2_PACKAGE_MIRAKC_ARIB
+	bool "mirakc-arib"
+	depends on BR2_INSTALL_LIBSTDCPP # needs C++ compiler
+	depends on BR2_TOOLCHAIN_HAS_THREADS # needs pthread
+	depends on BR2_USE_WCHAR # needs C99 compiler
+	help
+	  Mirakurun compatible PVR backend Mirakc tools.
+
+	  https://github.com/mirakc/mirakc-arib
+
+comment "mirakc-arib needs a toolchain w/ C++, threads, wchar"
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_TOOLCHAIN_HAS_THREADS || !BR2_USE_WCHAR

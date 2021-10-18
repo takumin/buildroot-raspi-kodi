@@ -1,0 +1,11 @@
+config BR2_PACKAGE_RECPT1
+	bool "recpt1"
+	depends on BR2_TOOLCHAIN_HAS_THREADS # needs pthread
+	depends on BR2_USE_WCHAR # needs C99 compiler
+	help
+	  Earthsoft PT1/PT2/PT3 Recoding Application.
+
+	  https://github.com/stz2012/recpt1
+
+comment "recpt1 needs a toolchain w/ threads, wchar"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS || !BR2_USE_WCHAR

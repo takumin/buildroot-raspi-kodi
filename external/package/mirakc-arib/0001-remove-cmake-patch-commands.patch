@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d899cf0..6a2f117 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -356,8 +356,6 @@ ExternalProject_Add(vendor-spdlog
+     ${MIRAKC_ARIB_VENDOR_DIR}
+   SOURCE_DIR
+     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog"
+-  PATCH_COMMAND
+-    git checkout -f && patch -p0 < ${CMAKE_SOURCE_DIR}/patches/spdlog.patch
+   CMAKE_ARGS
+     -D CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+     -D CMAKE_INSTALL_PREFIX=${MIRAKC_ARIB_VENDOR_DIR}
+@@ -626,8 +624,6 @@ ExternalProject_Add(vendor-libisdb
+     ${MIRAKC_ARIB_VENDOR_DIR}
+   SOURCE_DIR
+     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/libisdb"
+-  PATCH_COMMAND
+-    git checkout -f && patch -p0 < ${CMAKE_SOURCE_DIR}/patches/LibISDB.patch
+   CMAKE_ARGS
+     -D CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+     -D CMAKE_INSTALL_PREFIX=${MIRAKC_ARIB_VENDOR_DIR}

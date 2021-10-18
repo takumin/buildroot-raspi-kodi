@@ -1,0 +1,12 @@
+config BR2_PACKAGE_LIBARIB25
+	bool "libarib25"
+	depends on BR2_INSTALL_LIBSTDCPP # needs C++ compiler
+	depends on BR2_USE_WCHAR # needs C99 compiler
+	select BR2_PACKAGE_PCSC_LITE
+	help
+	  Basic implementation of the ARIB STD-B25 public standard.
+
+	  https://github.com/stz2012/libarib25
+
+comment "libarib25 needs a toolchain w/ C++, wchar"
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_USE_WCHAR

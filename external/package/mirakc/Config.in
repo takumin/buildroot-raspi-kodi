@@ -1,0 +1,9 @@
+config BR2_PACKAGE_MIRAKC
+	bool "mirakc"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+	select BR2_PACKAGE_HOST_RUSTC
+	select BR2_PACKAGE_LIBFUSE3
+	help
+	  Mirakurun-compatible PVR backend written in Rust.
+
+	  https://github.com/mirakc/mirakc

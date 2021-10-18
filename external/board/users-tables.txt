@@ -1,0 +1,1 @@
+admin -1 admin -1 =admin /home/admin /bin/sh adm,cdrom,dialout,floppy,video,audio,plugdev,sudo Admin User

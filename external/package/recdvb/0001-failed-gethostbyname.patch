@@ -1,0 +1,22 @@
+diff --git a/recpt1.c b/recpt1.c
+index 43e3baa..cf146a2 100644
+--- a/recpt1.c
++++ b/recpt1.c
+@@ -953,13 +953,12 @@ while(1){	// http-server add-
+ 
+ 		peer_host = gethostbyaddr((char *)&peer_sin.sin_addr.s_addr,
+ 				  sizeof(peer_sin.sin_addr), AF_INET);
+-		if ( peer_host == NULL ){
+-			fprintf(stderr, "gethostbyname failed\n");
+-			return 1;
++		if ( peer_host != NULL ){
++			fprintf(stderr,"connect from: %s [%s] port %d\n", peer_host->h_name, inet_ntoa(peer_sin.sin_addr), ntohs(peer_sin.sin_port));
++		} else {
++			fprintf(stderr,"connect from: %s port %d\n", inet_ntoa(peer_sin.sin_addr), ntohs(peer_sin.sin_port));
+ 		}
+ 
+-		fprintf(stderr,"connect from: %s [%s] port %d\n", peer_host->h_name, inet_ntoa(peer_sin.sin_addr), ntohs(peer_sin.sin_port));
+-
+ 		char buf[256];
+ 		read_line(connected_socket, buf);
+ 		fprintf(stderr,"request command is %s\n",buf);
