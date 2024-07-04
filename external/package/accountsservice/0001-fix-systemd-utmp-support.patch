@@ -1,0 +1,57 @@
+From 40ad72568ff4448e5b6faa6573039dc8201a5a35 Mon Sep 17 00:00:00 2001
+From: Takumi Takahashi <takumiiinn@gmail.com>
+Date: Mon, 2 Oct 2023 05:44:23 +0900
+Subject: fix systemd utmp support
+
+Signed-off-by: Takumi Takahashi <takumiiinn@gmail.com>
+---
+ meson.build | 33 +++------------------------------
+ 1 file changed, 3 insertions(+), 30 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 4a509e7..1d8db62 100644
+--- a/meson.build
++++ b/meson.build
+@@ -77,36 +77,9 @@ foreach func: check_functions
+   config_h.set('HAVE_' + func.underscorify().to_upper(), cc.has_function(func))
+ endforeach
+ 
+-if cc.has_header_symbol('utmpx.h', 'WTMPX_FILENAME', prefix: '#define _GNU_SOURCE')
+-  code = '''#define _GNU_SOURCE
+-  #include <stdio.h>
+-  #include <utmpx.h>
+-  int main (int argc, char **argv) {
+-    printf ("%s\n", WTMPX_FILENAME);
+-    return 0;
+-  }
+-  '''
+-  result = cc.run(code, name : 'value of WTMPX_FILENAME')
+-  path_wtmp = result.stdout().strip()
+-
+-  config_h.set('PATH_WTMP', 'WTMPX_FILENAME')
+-elif cc.has_header_symbol('paths.h', '_PATH_WTMPX')
+-  code = '''#include <paths.h>
+-  #include <stdio.h>
+-  int main (int argc, char **argv) {
+-    printf ("%s\n", _PATH_WTMPX);
+-    return 0;
+-  }
+-  '''
+-  result = cc.run(code, name : 'value of _PATH_WTMPX')
+-  path_wtmp = result.stdout().strip()
+-
+-  config_h.set('PATH_WTMP', '_PATH_WTMPX')
+-else
+-  path_wtmp = '/var/log/utx.log'
+-  assert(run_command('test', '-e', path_wtmp, check: false).returncode() == 0, 'Do not know which filename to watch for wtmp changes')
+-  config_h.set_quoted('PATH_WTMP', path_wtmp)
+-endif
++# required systemd utmp support
++path_wtmp = '/var/log/wtmp'
++config_h.set_quoted('PATH_WTMP', path_wtmp)
+ 
+ # compiler flags
+ common_flags = []
+-- 
+2.42.0
+

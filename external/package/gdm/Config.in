@@ -1,0 +1,106 @@
+comment "gdm needs a glibc toolchain w/ dynamic library, wchar, ssp, threads, libstd++, gcc >= 5, host gcc >= 8"
+	depends on BR2_USE_MMU # systemd
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS # systemd
+	depends on BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS # libgtk3
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # accountsservice
+	depends on \
+		BR2_STATIC_LIBS || \
+		!BR2_USE_WCHAR || \
+		!BR2_INSTALL_LIBSTDCPP || \
+		!BR2_TOOLCHAIN_GCC_AT_LEAST_5 || \
+		!BR2_TOOLCHAIN_HAS_SSP || \
+		!BR2_TOOLCHAIN_HAS_SYNC_4 || \
+		!BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_TOOLCHAIN_HEADERS_AT_LEAST_4_14 || \
+		!BR2_TOOLCHAIN_USES_GLIBC || \
+		!BR2_HOST_GCC_AT_LEAST_8
+
+comment "gdm needs systemd"
+	depends on BR2_USE_MMU # systemd
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS # systemd
+	depends on BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS # libgtk3
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # accountsservice
+	depends on !BR2_PACKAGE_SYSTEMD
+
+comment "gdm needs libgtk3"
+	depends on BR2_USE_MMU # systemd
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS # systemd
+	depends on BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS # libgtk3
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # accountsservice
+	depends on !BR2_PACKAGE_LIBGTK3
+
+comment "gdm needs xorg-server or xwayland-server"
+	depends on BR2_USE_MMU # systemd
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS # systemd
+	depends on BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS # libgtk3
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # accountsservice
+	depends on !BR2_PACKAGE_XSERVER_XORG_SERVER && !BR2_PACKAGE_XWAYLAND
+
+config BR2_PACKAGE_GDM
+	bool "gdm"
+	depends on BR2_USE_MMU # systemd
+	depends on BR2_PACKAGE_SYSTEMD_ARCH_SUPPORTS # systemd
+	depends on BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS # libgtk3
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # accountsservice
+	depends on !BR2_STATIC_LIBS # libcanberra
+	depends on BR2_USE_WCHAR # libglib2
+	depends on BR2_INSTALL_LIBSTDCPP # libgtk3
+	depends on BR2_TOOLCHAIN_GCC_AT_LEAST_5 # systemd
+	depends on BR2_TOOLCHAIN_HAS_SSP # systemd
+	depends on BR2_TOOLCHAIN_HAS_SYNC_4 # libgtk3
+	depends on BR2_TOOLCHAIN_HAS_THREADS # libglib2
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_4_14 # systemd
+	depends on BR2_TOOLCHAIN_USES_GLIBC # systemd
+	depends on BR2_HOST_GCC_AT_LEAST_8 # accountsservice
+	depends on BR2_PACKAGE_SYSTEMD
+	depends on BR2_PACKAGE_LIBGTK3
+	depends on BR2_PACKAGE_XSERVER_XORG_SERVER || BR2_PACKAGE_XWAYLAND
+	select BR2_PACKAGE_ACCOUNTSSERVICE
+	select BR2_PACKAGE_LIBCANBERRA
+	select BR2_PACKAGE_LIBGLIB2
+	select BR2_PACKAGE_LIBGTK3_WAYLAND if BR2_PACKAGE_XWAYLAND
+	select BR2_PACKAGE_LIBGTK3_X11 if BR2_PACKAGE_XSERVER_XORG_SERVER
+	select BR2_PACKAGE_LIBGUDEV
+	select BR2_PACKAGE_LIBXCB
+	select BR2_PACKAGE_LINUX_PAM
+	select BR2_PACKAGE_SYSTEMD_LOGIND
+	select BR2_PACKAGE_SYSTEMD_UTMP
+	select BR2_PACKAGE_XLIB_LIBX11
+	select BR2_PACKAGE_XLIB_LIBXAU
+	help
+	  The GNOME Display Manager (GDM) is a program that manages
+	  graphical display servers and handles graphical user logins.
+
+	  https://wiki.gnome.org/Projects/GDM
+
+if BR2_PACKAGE_GDM
+
+config BR2_PACKAGE_GDM_INITIAL_VT
+	int "Initial virtual terminal to use."
+	default 1
+
+config BR2_PACKAGE_GDM_IPV6
+	bool "Enables compilation of IPv6 code."
+
+config BR2_PACKAGE_GDM_XSESSION
+	bool "Enable installing the gdm Xsession file."
+	default y
+
+config BR2_PACKAGE_GDM_KEYUTILS
+	bool "Enable support keyutils."
+	select BR2_PACKAGE_KEYUTILS
+
+config BR2_PACKAGE_GDM_SELINUX
+	bool "Enable support selinux."
+	select BR2_PACKAGE_LIBSELINUX
+
+config BR2_PACKAGE_GDM_XDMCP
+	bool "Enable support xdmcp."
+	select BR2_PACKAGE_XLIB_LIBXDMCP
+
+config BR2_PACKAGE_GDM_AUDIT
+	bool "Enable support audit."
+	depends on BR2_PACKAGE_AUDIT_ARCH_SUPPORTS
+	select BR2_PACKAGE_AUDIT
+
+endif

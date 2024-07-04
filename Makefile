@@ -80,7 +80,7 @@ uboot-menuconfig: defconfig
 
 .PHONY: build
 build: defconfig
-	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR)
+	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) 2>&1 | tee $(BUILD_DIR)/build/build-all.log
 
 linux-rebuild: defconfig
 	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) linux-rebuild
@@ -93,6 +93,19 @@ barebox-rebuild: defconfig
 
 uboot-rebuild: defconfig
 	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) uboot-rebuild
+
+package-rebuild: defconfig
+	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) $(PACKAGE)-rebuild
+
+################################################################################
+#
+# publish
+#
+################################################################################
+
+.PHONY: publish
+publish:
+	rsync -av --progress --delete --exclude='*.cpio' $(BUILD_DIR)/images/ srv:/srv/netboot/rpi/
 
 ################################################################################
 #
@@ -123,6 +136,11 @@ endif
 uboot-dirclean:
 ifneq ("$(wildcard $(BUILD_DIR)/.config)","")
 	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) uboot-dirclean
+endif
+
+package-dirclean:
+ifneq ("$(wildcard $(BUILD_DIR)/.config)","")
+	@$(MAKE) -C buildroot O=$(BUILD_DIR) BR2_EXTERNAL=$(EXTERNAL_DIR) $(PACKAGE)-dirclean
 endif
 
 distclean:

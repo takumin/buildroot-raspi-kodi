@@ -1,0 +1,26 @@
+comment "accountsservice needs python3 and a glibc toolchain w/ wchar, threads, gcc >= 4.9, host gcc >= 8"
+	depends on BR2_USE_MMU
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS
+	depends on !BR2_HOST_GCC_AT_LEAST_8 || !BR2_PACKAGE_PYTHON3 || \
+		!BR2_TOOLCHAIN_GCC_AT_LEAST_4_9 || !BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_TOOLCHAIN_USES_GLIBC || !BR2_USE_WCHAR
+
+config BR2_PACKAGE_ACCOUNTSSERVICE
+	bool "accountsservice"
+	depends on BR2_HOST_GCC_AT_LEAST_8 # gobject-introspection
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS # gobject-introspection
+	depends on BR2_TOOLCHAIN_GCC_AT_LEAST_4_9 # gobject-introspection
+	depends on BR2_TOOLCHAIN_HAS_THREADS # libglib2
+	depends on BR2_TOOLCHAIN_USES_GLIBC # gobject-introspection
+	depends on BR2_USE_MMU # libglib2
+	depends on BR2_USE_WCHAR # libglib2
+	select BR2_PACKAGE_DBUS
+	select BR2_PACKAGE_GOBJECT_INTROSPECTION
+	select BR2_PACKAGE_LIBGLIB2
+	select BR2_PACKAGE_POLKIT
+	select BR2_PACKAGE_PYTHON3
+	select BR2_PACKAGE_SYSTEMD_UTMP
+	help
+	  query and manipulate user account information.
+
+	  https://www.freedesktop.org/wiki/Software/AccountsService/

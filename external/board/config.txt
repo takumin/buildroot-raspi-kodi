@@ -1,0 +1,29 @@
+# Boot
+arm_64bit=1
+kernel=Image
+initramfs rootfs.cpio.xz followkernel
+
+# Performance
+arm_boost=1
+force_turbo=1
+
+# Video Core 4 KMS
+dtoverlay=vc4-kms-v3d-pi4,cma-512
+max_framebuffers=2
+
+# RCA Monitor
+hdmi_ignore_cec_init=1
+hdmi_ignore_hotplug=1
+disable_fw_kms_setup=1
+disable_overscan=1
+disable_splash=1
+enable_tvout=1
+sdtv_mode=1
+sdtv_aspect=1
+framebuffer_width=480
+framebuffer_height=320
+
+# Serial
+dtoverlay=miniuart-bt
+dtoverlay=krnbt=on
+enable_uart=1

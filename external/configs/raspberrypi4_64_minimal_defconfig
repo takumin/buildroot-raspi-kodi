@@ -1,0 +1,30 @@
+# Mirrors
+BR2_DL_DIR="$(DL_DIR)"
+BR2_KERNEL_MIRROR="https://ftp.jaist.ac.jp/pub/Linux/kernel.org"
+BR2_GNU_MIRROR="https://ftp.jaist.ac.jp/pub/GNU"
+BR2_CPAN_MIRROR="https://ftp.jaist.ac.jp/pub/CPAN"
+
+# Toolchain
+BR2_TOOLCHAIN=y
+BR2_TOOLCHAIN_EXTERNAL=y
+BR2_TOOLCHAIN_EXTERNAL_DOWNLOAD=y
+BR2_TOOLCHAIN_EXTERNAL_ARM_AARCH64=y
+
+# Ccache
+BR2_CCACHE=y
+BR2_CCACHE_DIR="$(CCACHE_DIR)"
+BR2_CCACHE_INITIAL_SETUP="--max-size 8G"
+
+# Disable build-id
+BR2_REPRODUCIBLE=y
+
+# Architecture
+BR2_aarch64=y
+BR2_cortex_a72=y
+BR2_ARM_FPU_VFPV4=y
+
+# System
+BR2_INIT_SYSTEMD=y
+
+# Disable tarball rootfs
+BR2_TARGET_ROOTFS_TAR=n

@@ -1,2 +1,0 @@
-# No wait autoboot
-CONFIG_BOOTDELAY=0

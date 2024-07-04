@@ -1,0 +1,5 @@
+# From https://download.gnome.org/sources/gnome-session/45/gnome-session-45.0.sha256sum
+sha256  706d2ffcacac38553a3c0185793f5a2b4aac940bb5e789d953c9808163bef2f1  gnome-session-45.0.tar.xz
+
+# Hash for license file:
+sha256  8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643  COPYING

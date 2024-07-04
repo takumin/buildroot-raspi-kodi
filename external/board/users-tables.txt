@@ -1,1 +1,1 @@
-admin -1 admin -1 =admin /home/admin /bin/sh adm,cdrom,dialout,floppy,video,audio,plugdev,sudo Admin User
+kodi 500 kodi 500 * /home/kodi - cdrom,video,audio,input Kodi User
